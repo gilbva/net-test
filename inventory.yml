@@ -53,7 +53,7 @@ pcs:
         routes:
             - net: 10.220.0.0
               mask: 255.255.0.0
-              next_hop: 10.220.2.10
+              next_hop: 10.220.3.10
       pc2:
         ansible_host: 192.168.22.106
         ansible_user: vagrant
@@ -61,7 +61,7 @@ pcs:
         routes:
           - net: 10.220.0.0
             mask: 255.255.0.0
-            next_hop: 10.220.3.10
+            next_hop: 10.220.4.10
       pc3:
         ansible_host: 192.168.22.107
         ansible_user: vagrant
@@ -69,7 +69,7 @@ pcs:
         routes:
           - net: 10.220.0.0
             mask: 255.255.0.0
-            next_hop: 10.220.4.10
+            next_hop: 10.220.5.10
       pc4:
         ansible_host: 192.168.22.108
         ansible_user: vagrant
@@ -77,4 +77,4 @@ pcs:
         routes:
           - net: 10.220.0.0
             mask: 255.255.0.0
-            next_hop: 10.220.5.10
+            next_hop: 10.220.6.10
