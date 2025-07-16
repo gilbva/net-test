@@ -1,0 +1,21 @@
+#!/bin/bash
+
+function genkeys {
+  prvkey=$(wg genkey)
+  pubkey=$(echo "$prvkey" | wg pubkey)
+
+  echo -n $prvkey | ansible-vault encrypt_string --vault-password-file ".password" --output /tmp/wg_tmp_key
+  enckey=$(cat /tmp/wg_tmp_key)
+
+  yq -i e ".$2.hosts.$1.vpn.public_key = \"$pubkey\"" inventory.yml
+  yq -i e ".$2.hosts.$1.vpn.private_key = \"$enckey\"" inventory.yml
+}
+
+yq '.vpn-contabo.hosts | keys[]' inventory.yml | while IFS= read -r host; do
+  genkeys $host 'vpn-contabo'
+done
+
+yq '.vpn-alpine.hosts | keys[]' inventory.yml | while IFS= read -r host; do
+  genkeys $host 'vpn-alpine'
+done
+

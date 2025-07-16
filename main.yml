@@ -1,0 +1,15 @@
+- name: update routers
+  gather_facts: true
+  hosts: routers
+  become: true
+  roles:
+    - role: cludus.commons.dns
+    - role: cludus.commons.router
+
+- name: update pcs
+  gather_facts: true
+  hosts: pcs
+  become: true
+  roles:
+    - role: cludus.commons.dns
+    - role: cludus.commons.routes

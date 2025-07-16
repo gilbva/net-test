@@ -1,0 +1,7 @@
+#!/bin/bash
+
+rm -rf .target/certs
+mkdir -p .target/certs
+openssl genrsa -out .target/certs/cludus-root-ca.key 4096
+openssl req -x509 -new -nodes -key .target/certs/cludus-root-ca.key -sha256 -days 1024 -subj "/C=US/ST=Florida/L=Cape Coral/O=Cludus/OU=Cludus Network/CN=cludus.net" -out .target/certs/cludus-root-ca.pem
+ansible-vault encrypt .target/certs/cludus-root-ca.key .target/certs/cludus-root-ca.pem

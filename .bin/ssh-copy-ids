@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# this script requires to add the password to the pass utility for all servers, like this
+# pass insert cludus.net/rt.gilb-home
+# pass insert cludus.net/rt-us.pub
+# pass insert cludus.net/rt-eu.pub
+
+function copy_id {
+    user=$1
+    server_name=$2
+    server="$2.cludus.net"
+    srv_pass=$(pass cludus.net/$server_name)
+    if [ $? -ne 0 ]; then
+      return 1
+    fi
+
+    ping -c 1 $server
+    if [ $? -ne 0 ]; then
+        echo "$server is not accessible"
+        return 1
+    fi
+
+    sshpass -p $srv_pass ssh-copy-id -o StrictHostKeyChecking=no $user@$server
+    if [ $? -eq  0 ]; then
+      echo "ssh id for $user@$server copied successfully"
+      return 1
+    else
+      echo "$user@$server ssh id could not be copied"
+      return 1
+    fi
+}
+
+copy_id root rt.gilb-home
+copy_id root rt-us.pub
+copy_id root rt-eu.pub
