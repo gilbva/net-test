@@ -45,36 +45,51 @@ routers:
           suffix: 24
 
 pcs:
-    hosts:
-      pc1:
-        ansible_host: 192.168.22.105
-        ansible_user: vagrant
-        hostname: pc1
-        routes:
-            - net: 10.220.0.0
-              mask: 255.255.0.0
-              next_hop: 10.220.3.10
-      pc2:
-        ansible_host: 192.168.22.106
-        ansible_user: vagrant
-        hostname: pc2
-        routes:
+  hosts:
+    pc1:
+      ansible_host: 192.168.22.105
+      ansible_user: vagrant
+      hostname: pc1
+      routes:
           - net: 10.220.0.0
             mask: 255.255.0.0
-            next_hop: 10.220.4.10
-      pc3:
-        ansible_host: 192.168.22.107
-        ansible_user: vagrant
-        hostname: pc3
-        routes:
-          - net: 10.220.0.0
-            mask: 255.255.0.0
-            next_hop: 10.220.5.10
-      pc4:
-        ansible_host: 192.168.22.108
-        ansible_user: vagrant
-        hostname: pc4
-        routes:
-          - net: 10.220.0.0
-            mask: 255.255.0.0
-            next_hop: 10.220.6.10
+            next_hop: 10.220.3.10
+    pc2:
+      ansible_host: 192.168.22.106
+      ansible_user: vagrant
+      hostname: pc2
+      routes:
+        - net: 10.220.0.0
+          mask: 255.255.0.0
+          next_hop: 10.220.4.10
+    pc3:
+      ansible_host: 192.168.22.107
+      ansible_user: vagrant
+      hostname: pc3
+      routes:
+        - net: 10.220.0.0
+          mask: 255.255.0.0
+          next_hop: 10.220.5.10
+    pc4:
+      ansible_host: 192.168.22.108
+      ansible_user: vagrant
+      hostname: pc4
+      routes:
+        - net: 10.220.0.0
+          mask: 255.255.0.0
+          next_hop: 10.220.6.10
+
+proxy:
+  hosts:
+    proxy1:
+      ansible_host: 192.168.22.105
+      ansible_user: vagrant
+      http_proxy:
+        email: gilberto.vento@cludus.com
+        listen_ips:
+          - 192.168.22.105
+        domains:
+          - name: example.com
+            proxy_pass: http://pc1:8080
+          - name: example2.com
+            proxy_pass: http://pc2:8080
