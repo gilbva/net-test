@@ -93,3 +93,12 @@ proxy:
             proxy_pass: http://pc1:8080
           - name: example2.com
             proxy_pass: http://pc2:8080
+
+secure:
+  hosts:
+    secure1:
+      ansible_host: 192.168.22.108
+      ansible_user: vagrant
+      firewall:
+        admin_ip: 192.168.0.0/16
+        allow_routing: true

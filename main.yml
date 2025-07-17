@@ -1,23 +1,30 @@
-- name: update routers
-  gather_facts: true
-  hosts: routers
-  become: true
-  roles:
-    - role: cludus.commons.dns
-    - role: cludus.commons.router
+#- name: update routers
+#  gather_facts: true
+#  hosts: routers
+#  become: true
+#  roles:
+#    - role: cludus.commons.dns
+#    - role: cludus.commons.router
+#
+#- name: update pcs
+#  gather_facts: true
+#  hosts: pcs
+#  become: true
+#  roles:
+#    - role: cludus.commons.dns
+#    - role: cludus.commons.routes
+#
+#- name: update proxy
+#  gather_facts: true
+#  hosts: proxy
+#  become: true
+#  roles:
+#    - role: cludus.commons.docker
+#    - role: cludus.commons.httpproxy
 
-- name: update pcs
+- name: update secure
   gather_facts: true
-  hosts: pcs
+  hosts: secure
   become: true
   roles:
-    - role: cludus.commons.dns
-    - role: cludus.commons.routes
-
-- name: update proxy
-  gather_facts: true
-  hosts: proxy
-  become: true
-  roles:
-    - role: cludus.commons.docker
-    - role: cludus.commons.httpproxy
+    - role: cludus.commons.firewall
