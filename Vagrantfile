@@ -1,7 +1,8 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-image = "generic-x64/alpine319"
+# image = "generic-x64/alpine319"
+image = "roboxes/ubuntu2204"
 
 vms = [
   {:title => "r1", :ip => "192.168.22.100", :box => image, :router => false, :nets => [
@@ -53,14 +54,14 @@ Vagrant.configure("2") do |config|
 
       cfg.vm.provider "libvirt" do |vb|
         vb.driver   = "kvm"
-        vb.cpus     = 1
-        vb.memory   = "256"
-        vb.storage :file, :size => '500M'
+        vb.cpus     = 2
+        vb.memory   = "4096"
+        vb.storage :file, :size => '3G'
       end
 
-      cfg.vm.provision "shell", inline: <<-SCRIPT
-apk add --no-cache python3 py3-pip
-      SCRIPT
+#       cfg.vm.provision "shell", inline: <<-SCRIPT
+# apk add --no-cache python3 py3-pip
+#       SCRIPT
     end
   end
 end
